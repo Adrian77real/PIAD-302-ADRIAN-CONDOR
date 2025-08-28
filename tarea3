@@ -1,0 +1,79 @@
+SELECT * From Customers
+
+WHERE customerID IN (
+
+
+   Select CustomerID From Customers 
+
+   Where CustomerID IN ('ALFKI', 'Anatir', 'Anton', 'Arout', 'Bergs')
+
+)
+
+GROUP BY CategoryID
+
+Select 'Piad-302' From Categories
+Union all
+Select 'Piad-303' from Categories
+
+--2 = 8, 77, 85
+Select 'Piad-302', 'Piad-305' From Categories 
+Union All
+Select 'Piad-303', 'Piad-304' From Categories
+
+--Unir todas las filas, id nombre de las tablas productos y categorias.
+SELECT CategoryId,CategoryName from Categories
+union all 
+Select ProductID,ProductName from Products
+
+--Consulta - Uso de INNER JOIN
+Select p.ProductID, p.ProductName, p.UnitPrice, c.CategoryName From Products p
+inner Join Categories c ON p.CategoryID = c.CategoryID
+
+-- Mostrar el prodducto,Productamente,unitprice,categoryName
+
+--Orders y customers --> INNER (3 columnas de cada tabla)
+Select o.OrderID, o.OrderDate, o.ShipCity,
+       c.customerID, c.CompanyName, c.CompanyName
+From Orders o
+Inner Join customers c On o.CustomerID = c.CustomerID;
+
+--Orders y Orders Details --> INNER (5 columnas de cada tabla)
+
+Select o.OrderID, o.OrderDate, o.CustomerID, o.ShipCity, o.Freight,
+       od.ProductID, od.UnitPrice, od.Quantity, od.Discount, od.OrderId
+From Orders o
+Inner Join [Order Details] od ON od.OrderID = o.OrderID;
+
+
+1 -- MOSTRAR EL TOTAL DE LOS "ORDERS" Y AGRUPARLOS POR COMPANY NAME
+--NOTA: PARA CALCULAR EL TOTAL, LOS OBTIENES DE LA TABLA ORDER DETAILS(UNITPRICE * QUANTITY)
+----ejemplo:
+--ALFREDS FUTTERKISTE    -600
+--ANA TRUJILLO EMPAREDADOS Y HELADOS -956
+
+
+SELECT
+    c.CompanyName,
+    SUM(od.UnitPrice * od.Quantity) AS TotalOrders
+FROM Customers c
+INNER JOIN Orders o
+    ON c.CustomerID = o.CustomerID
+INNER JOIN [Order Details] od
+    ON o.OrderID = od.OrderID
+GROUP BY c.CompanyName
+ORDER BY TotalOrders DESC;
+
+
+--2. MOSTRA LA CANTIDAD DE " ORDERS" AGRUPADOS POR EL NOMBRE DEL EMPLEADOS
+--EJEMPLO: 
+--NANCY 20
+--JANET 88
+
+SELECT e.FirstName, COUNT(o.OrderID) AS CantidadOrders
+FROM Employees e
+INNER JOIN Orders o ON e.EmployeeID = o.EmployeeID
+GROUP BY e.FirstName;
+
+
+
+ 
