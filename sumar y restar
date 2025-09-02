@@ -1,0 +1,101 @@
+--Crear un store procedure para sumar 
+-- Ejemplo: Como crear un procedimiento almacenado
+CREATE PROC SumarNumeros
+(
+      @numero1 int, 
+	  @numero2 int
+)
+AS
+    print '' + @numero1 + @numero2 + '';
+
+-- Ejemplo: Ejecutar el procedimiento alamcenado creado.
+EXEC SumarNumeros 100, 200;
+
+-- Crear 4 procedimientos Almacenados: Restar, Multiplicar, Dividir, Potenciador.
+
+DROP PROCEDURE IF EXISTS SumarNumeros;
+GO
+
+-- Eliminar procedimientos si existen
+DROP PROCEDURE IF EXISTS SumarNumeros;
+GO
+
+CREATE PROCEDURE SumarNumeros
+(
+    @numero1 INT,
+    @numero2 INT
+)
+AS
+BEGIN
+    PRINT 'Resultado de la suma: ' + CAST(@numero1 + @numero2 AS VARCHAR);
+END;
+GO
+
+
+DROP PROCEDURE IF EXISTS RestarNumeros;
+GO
+
+CREATE PROCEDURE RestarNumeros
+(
+    @numero1 INT,
+    @numero2 INT
+)
+AS
+BEGIN
+    PRINT 'Resultado de la resta: ' + CAST(@numero1 - @numero2 AS VARCHAR);
+END;
+GO
+
+
+DROP PROCEDURE IF EXISTS MultiplicarNumeros;
+GO
+
+CREATE PROCEDURE MultiplicarNumeros
+(
+    @numero1 INT,
+    @numero2 INT
+)
+AS
+BEGIN
+    PRINT 'Resultado de la multiplicación: ' + CAST(@numero1 * @numero2 AS VARCHAR);
+END;
+GO
+
+
+DROP PROCEDURE IF EXISTS DividirNumeros;
+GO
+
+CREATE PROCEDURE DividirNumeros
+(
+    @numero1 FLOAT,
+    @numero2 FLOAT
+)
+AS
+BEGIN
+    IF @numero2 = 0
+        PRINT 'Error: No se puede dividir entre cero.';
+    ELSE
+        PRINT 'Resultado de la división: ' + CAST(@numero1 / @numero2 AS VARCHAR);
+END;
+GO
+
+
+DROP PROCEDURE IF EXISTS PotenciadorNumeros;
+GO
+
+CREATE PROCEDURE PotenciadorNumeros
+(
+    @base FLOAT,
+    @exponente FLOAT
+)
+AS
+BEGIN
+    PRINT 'Resultado de la potencia: ' + CAST(POWER(@base, @exponente) AS VARCHAR);
+END;
+GO
+
+EXEC SumarNumeros 10, 20;
+EXEC RestarNumeros 50, 30;
+EXEC MultiplicarNumeros 5, 5;
+EXEC DividirNumeros 100, 4;
+EXEC PotenciadorNumeros 2, 8;
