@@ -1,0 +1,56 @@
+package javaapplication9;
+
+import java.util.Scanner;
+
+public class Ejercisio3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Números pares del 1 al 100:");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println("\n");
+        
+        System.out.println("Números múltiplos de 5 del 1 al 100:");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 5 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println("\n");
+
+        System.out.print("Ingrese un número: ");
+        int numero = scanner.nextInt();
+
+        System.out.println("Números menores o iguales a " + numero + ":");
+        for (int i = 1; i <= numero; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println("\n");
+
+        System.out.print("Ingrese el número inicial de la tabla: ");
+        int inicio = scanner.nextInt();
+
+        System.out.print("Ingrese el número final de la tabla: ");
+        int fin = scanner.nextInt();
+
+        
+        if (inicio > fin) {
+            System.out.println("El número inicial debe ser menor o igual al número final.");
+        } else {
+            
+            for (int num = inicio; num <= fin; num++) {
+                System.out.println("Tabla del " + num + ":");
+                for (int i = 1; i <= 12; i++) {
+                    System.out.println(num + " x " + i + " = " + (num * i));
+                }
+                System.out.println(); 
+            }
+        }
+
+        scanner.close();  
+    }
+}
